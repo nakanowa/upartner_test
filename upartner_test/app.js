@@ -9,7 +9,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
-var app = express();
+//var app = express();
+var app = module.exports = express();
+
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -30,9 +32,28 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+///** ログイン状態チェック
+//var login_check = function(req, res, next){
+//    if(req.session.login === true){
+//        next()
+//    }else{
+//        res.redirect('/')
+//    }
+//}
+//*/
+
+// ルート定義
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.post('/', routes.talk);
+app.post('/login', routes.login);
+app.post('/signup', routes.signup);
+app.get('/user', user.list);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+    console.log("Express server listening on port " + app.get('port'));
 });
+
+
+
