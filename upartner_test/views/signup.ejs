@@ -1,0 +1,18 @@
+<% include header %>
+
+
+    <% if (about) { %>
+        <h2><%= about %></h2>
+    <% } %>
+
+    <!-- サインアップ処理 -->
+    <form method="POST" action="/do">
+        <p>username <input name="username" type="text" size="100" /></p>
+        <p>userid <input name="user" type="text" size="30" /></p>
+        <p>email <input name="email" type="text" size="100" /></p>
+        <p>admin password   <input name="adminpass" type="password" size="30"></p>
+        <p>confirm password <input name="confirmpass" type="password" size="30"></p>
+        <p><input type="submit" value="signup" /></p>
+    </form>
+
+<% include footer %>

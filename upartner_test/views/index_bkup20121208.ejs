@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <% if (about) { %>
+    <h2><%= about %></h2>
+    <% } %>
+
+    <!-- ログイン処理 -->
+    <form method="POST" action="/login">
+        <p>Login<input name="user" type="text" size="30" />
+        password<input name="pass" type="password" size="30" />
+        <input type="submit" value="login" /></p>
+    </form>
+
+    <br>
+    <!-- サインアップ処理 -->
+    <form method="POST" action="/signup">
+        <p>username <input name="username" type="text" size="100" /></p>
+        <p>userid <input name="user" type="text" size="30" /></p>
+        <p>email <input name="email" type="text" size="100" /></p>
+        <p>admin password   <input name="adminpass" type="password" size="30"></p>
+        <p>confirm password <input name="confirmpass" type="password" size="30"></p>
+        <p><input type="submit" value="signup" /></p>
+    </form>
+
+    <!-- talk処理 -->
+    <form method="POST" action="/">
+        <p>
+            <input name="talkarea" type="text" size="70" />
+            <input name="" type="submit" value="talk" />
+        </p>
+        <p><textarea cols="70" rows="15" name="textarea" ><%= textarea2 %></textarea></p>
+    </form>
+
+</body>
+</html>

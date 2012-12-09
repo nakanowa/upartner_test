@@ -6,6 +6,8 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , signup = require('./routes/signup')
+  , userList = require('./routes/userList')
   , http = require('http')
   , path = require('path');
 
@@ -46,10 +48,14 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.post('/', routes.talk);
 app.post('/login', routes.login);
-app.post('/signup', routes.signup);
+app.get('/login', routes.getLogin);
 app.get('/user', user.list);
 
+app.get('/signup', signup.index);
+app.post('/do', signup.signup);
+app.get('/do', signup.getSignup);
 
+app.post('/userList', userList.index);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));

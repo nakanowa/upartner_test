@@ -1,0 +1,31 @@
+<% include header %>
+
+<h2>ユーザ一覧</h2>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <td></td>
+        <td>name</td>
+        <td>userid</td>
+        <td>password</td>
+        <td>email</td>
+    </tr>
+    <thead>
+    <tbody>
+    <% for( var i in userlist ) { %>
+        <tr>
+
+        <td><input type="radio" name="button" value="userlist[i].id"></td>
+        <td><%= userlist[i].name %></td>
+        <td><%= userlist[i].userid %></td>
+        <td><%= userlist[i].password %></td>
+        <td><%= userlist[i].email %></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+
+
+
+<% include footer %>
