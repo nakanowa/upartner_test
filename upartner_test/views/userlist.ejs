@@ -2,29 +2,36 @@
 
 <h2>ユーザ一覧</h2>
 
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <td></td>
-        <td>name</td>
-        <td>userid</td>
-        <td>password</td>
-        <td>email</td>
-    </tr>
-    <thead>
-    <tbody>
-    <% for( var i in userlist ) { %>
-        <tr>
+    <form method="POST" action="/userDelete">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td></td>
+                <td>name</td>
+                <td>userid</td>
+                <td>password</td>
+                <td>email</td>
+            </tr>
+        <thead>
+        <tbody>
+            <% for( var i in userlist ) { %>
+                <tr>
+                    <% if(i === '0') { %>
+                        <td><input type="radio" name="selectId" value="<%= userlist[i].id %>" checked></td>
+                    <% } else { %>
+                        <td><input type="radio" name="selectId" value="<%= userlist[i].id %>"></td>
+                    <% } %>
+                <td><%= userlist[i].name %></td>
+                <td><%= userlist[i].userid %></td>
+                <td><%= userlist[i].password %></td>
+                <td><%= userlist[i].email %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+            <p><input name="" type="submit" value="ユーザ削除" class="btn" /></p>
+    </form>
 
-        <td><input type="radio" name="button" value="userlist[i].id"></td>
-        <td><%= userlist[i].name %></td>
-        <td><%= userlist[i].userid %></td>
-        <td><%= userlist[i].password %></td>
-        <td><%= userlist[i].email %></td>
-        </tr>
-    <% } %>
-    </tbody>
-</table>
 
 
 
