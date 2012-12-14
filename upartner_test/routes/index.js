@@ -3,9 +3,23 @@
  */
 exports.index = function(req, res){
     //res.charset = 'ISO-8859-1';
-  res.render('index', { title: 'U-PARTNER' ,
+    
+        console.log(req.session.loginflg);
+        console.log(req.session.user);
+        /** ログイン状態チェック **/
+
+        if(req.session.loginflg === '1'){
+            res.render('index', { user : req.session.user,
+                        title: 'U-PARTNER' ,
                         about: 'このサイトはEXPRESSで作られています。',
                         textarea2:''});
+                        return;
+        }else{
+            res.render('top', { user : req.session.user,
+                        title: 'U-PARTNER' ,
+                        about: 'このサイトはEXPRESSで作られています。',
+                        textarea2:''});
+            }
 };
 
 
@@ -16,6 +30,7 @@ exports.talk = function(req,res){
     var TextArea = req.body.textarea + req.body.talkarea + '\n';
 
         res.render('index', {
+            user : req.session.user,
             title: 'U-PARTNER' ,
             about : 'Aさんが発言しました。',
             textarea2:TextArea
@@ -35,6 +50,8 @@ exports.talk = function(req,res){
 exports.login = function(req ,res){
 
 
+    var errmsg;
+
     // users model 読み込み
     var users = require('../models/users');    
     
@@ -44,20 +61,14 @@ exports.login = function(req ,res){
     
     // ユーザ入力チェック
     if (userid === null || userid === '' ){
-        res.render('index', {
-            title: 'U-PARTNER' ,
-            about : 'ユーザ・パスワードを入力してください。',
-            textarea2: ''
-        });
+        errmsg = "ユーザ・パスワードを入力してください。";
+        res.render('index', {user : req.session.user,title: 'U-PARTNER' ,about : errmsg,textarea2:''});
         return;
     }
     // パスワード入力チェック
     if(passwd === null || passwd === '' ){
-        res.render('index', {
-            title: 'U-PARTNER' ,
-            about : 'ユーザ・パスワードを入力してください。',
-            textarea2: ''
-        });
+        errmsg = "ユーザ・パスワードを入力してください。";
+        res.render('index', {user : req.session.user,title: 'U-PARTNER' ,about : errmsg,textarea2:''});
         return;
     }
 
@@ -66,32 +77,46 @@ exports.login = function(req ,res){
         
         // ユーザ情報取得チェック
         if(users === null){
-            console.log('1');
-            res.render('index', {
-                title: 'U-PARTNER' ,
-                about : "ユーザが存在しません userid：" + userid,
-                textarea2: ''
-            });
-        return;
+            errmsg = "ユーザが存在しません userid：" + userid;
+            res.render('index', {user : req.session.user,title: 'U-PARTNER' ,about : errmsg,textarea2:''});
+            return;
         }
         
         // パスワードチェック
         if(users.password === passwd){
-            res.render('index', {
-                title: 'U-PARTNER' ,
-                about : 'ログインに成功しました',
-                textarea2: ''
-            });
+            
+            //セッションに格納する
+            req.session.loginflg = '1';
+            req.session.name = users.name;
+            req.session.user = users.userid;
+            req.session.pass = users.password;
+            req.session.email = users.email;
+
+            errmsg = "ログインに成功しました";
+            res.render('index', {user : req.session.user,title: 'U-PARTNER' ,about : errmsg,textarea2:''});
+            
         }else{
-            res.render('index', {
-                title: 'U-PARTNER' ,
-                about : 'ログインに失敗しました',
-                textarea2: ''
-            });
+            errmsg = "ログインに失敗しました";
+           res.render('index', {user : req.session.user,title: 'U-PARTNER' ,about : errmsg,textarea2:''});
+
         }
  
     });
-    
-   
 
 };
+
+
+/*
+ * ログアウト
+ */
+ exports.getLogout = function(req,res){
+     res.redirect('/');
+ }
+
+
+exports.logout = function(req,res){
+    req.session.destroy();
+    res.redirect('/');
+}
+
+

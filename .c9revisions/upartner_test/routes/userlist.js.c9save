@@ -8,3 +8,5 @@
 {"ts":1355048341814,"patch":[[{"diffs":[[0," console"],[1,".log"],[0,"(selectI"]],"start1":1294,"start2":1294,"length1":16,"length2":20}]],"length":1889,"saved":false}
 {"ts":1355048399717,"patch":[[{"diffs":[[0,"remove({"],[1,"_"],[0,"id : sel"]],"start1":1333,"start2":1333,"length1":16,"length2":17}]],"length":1890,"saved":false}
 {"ts":1355048437445,"patch":[[{"diffs":[[0,"   \n"],[-1,"    console.log(selectId);\n"],[0,"    "]],"start1":1287,"start2":1287,"length1":35,"length2":8}]],"length":1863,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1355404619421,"patch":[[{"diffs":[[0,"r('userlist', { "],[1,"user : req.session.user \n                                            ,"],[0,"title : 'U-PARTN"]],"start1":1562,"start2":1562,"length1":32,"length2":102}]],"length":1933,"saved":false}
+{"ts":1355404640296,"patch":[[{"diffs":[[0,"r('userlist', { "],[1,"user : req.session.user \n                                ,"],[0,"title : 'U-PARTN"]],"start1":827,"start2":827,"length1":32,"length2":90}]],"length":1991,"saved":false}

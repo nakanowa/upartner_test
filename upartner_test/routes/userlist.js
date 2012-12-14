@@ -37,7 +37,8 @@ exports.index = function(req, res){
     users.find( function(err , userlist){
         
         if(userlist !== null){
-        res.render('userlist', { title : 'U-PARTNER'
+        res.render('userlist', { user : req.session.user 
+                                ,title : 'U-PARTNER'
                                 ,about : 'ユーザ一覧'
                                 ,userlist : userlist });
         }else{
@@ -67,7 +68,8 @@ exports.userDelete = function(req,res){
             users.find( function(err , userlist){
         
                 if(userlist !== null){
-                    res.render('userlist', { title : 'U-PARTNER'
+                    res.render('userlist', { user : req.session.user 
+                                            ,title : 'U-PARTNER'
                                             ,about : 'ユーザ一覧'
                                             ,userlist : userlist });        
                 }else{

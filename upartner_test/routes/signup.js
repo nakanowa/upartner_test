@@ -3,7 +3,8 @@
  */
 exports.index = function(req, res){
     //res.charset = 'ISO-8859-1';
-  res.render('signup', { title: 'U-PARTNER' ,
+  res.render('signup', { user : req.session.user 
+                        ,title: 'U-PARTNER' ,
                         about: 'このサイトはEXPRESSで作られています。'
                         });
 };
@@ -29,7 +30,8 @@ exports.signup = function(req, res){
     // 入力チェック
     if (username === '' || userid === '' || email === '' || adminpass === '' || confirmpass === ''){
             res.render('signup', {
-            title: 'U-PARTNER' ,
+            user : req.session.user 
+            ,title: 'U-PARTNER' ,
             about : '入力していない項目があります'
         });
         return;
@@ -38,7 +40,8 @@ exports.signup = function(req, res){
     // パスワードチェック
     if (adminpass !== confirmpass){
         res.render('signup', {
-            title: 'U-PARTNER' ,
+            user : req.session.user 
+            ,title: 'U-PARTNER' ,
             about : 'パスワードに誤りがあります。'
         });
         return;
@@ -48,15 +51,24 @@ exports.signup = function(req, res){
     users.findOne({userid:userid}, function(err , users){
         
         // ユーザ情報取得チェック
-        if(users !== null || users.email === email){
-                    console.log('1');
+        if(users !== null ){
                     res.render('signup', {
-                        title: 'U-PARTNER' ,
+                        user : req.session.user 
+                        ,title: 'U-PARTNER' ,
                         about : "既にユーザが存在します"
                     });
                 return;
         }
- 
+        
+        // ユーザ情報取得チェック
+        if(users.email === email){
+                    res.render('signup', {
+                        user : req.session.user 
+                        ,title: 'U-PARTNER' ,
+                        about : "既にユーザが存在します"
+                    });
+                return;
+        } 
     });
    
         
@@ -72,13 +84,15 @@ exports.signup = function(req, res){
     user.save(function(err){
         if(err){
             res.render('signup', {
-            title: 'U-PARTNER' ,
+            user : req.session.user 
+            ,title: 'U-PARTNER' ,
             about : 'アカウント作成に失敗しました。'
             });
             return;
         }else{
             res.render('signup', {
-            title: 'U-PARTNER' ,
+            user : req.session.user 
+            ,title: 'U-PARTNER' ,
             about : 'アカウントが作成されました。'
             });
             return;

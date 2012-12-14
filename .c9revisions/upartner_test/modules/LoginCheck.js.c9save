@@ -1,0 +1,2 @@
+{"ts":1355401953939,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1355402119796,"patch":[[{"diffs":[[1,"/** ログイン状態チェック **/\r\nvar login_check = function(req, res, next){\r\n    if(req.session.loginflg === \"1\"){\r\n        next();\r\n    }else{\r\n        res.redirect('/');\r\n    }\r\n};"]],"start1":0,"start2":0,"length1":0,"length2":170}]],"length":170,"saved":false}

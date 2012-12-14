@@ -23,8 +23,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  app.use(express.cookieParser());
+  app.use(express.session({secret:"Keyboard cat"}));
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
@@ -34,21 +34,15 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-///** ログイン状態チェック
-//var login_check = function(req, res, next){
-//    if(req.session.login === true){
-//        next()
-//    }else{
-//        res.redirect('/')
-//    }
-//}
-//*/
+
 
 // ルート定義
 app.get('/', routes.index);
 app.post('/', routes.talk);
 app.post('/login', routes.login);
 app.get('/login', routes.getLogin);
+app.post('/logout', routes.logout);
+app.get('/logout', routes.getLogout);
 app.get('/user', user.list);
 
 app.get('/signup', signup.index);

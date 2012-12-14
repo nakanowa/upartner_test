@@ -71,27 +71,37 @@
             </ul>
         </div>
 
-        <div class="nav-collapse collapse">
+            <% if(!user){%>
+
+                <div class="nav-collapse collapse">
+                
+                    <!-- サインアップページへ -->
+                    <form method="GET" action="/signup" class="navbar-form pull-right">
+                    　<input type="submit" value="signup" class="btn">
+                    </form>
+                    <!-- サインアップページへ -->
+                </div>
         
-            <!-- サインアップページへ -->
-            <form method="GET" action="/signup" class="navbar-form pull-right">
-            　<input type="submit" value="signup" class="btn">
-            </form>
-            <!-- サインアップページへ -->
-        </div>
+                <div class="nav-collapse collapse">
 
-        <div class="nav-collapse collapse">
 
-            <!-- セッション処理記述予定 -->
-            <!-- ログイン -->
-            <form method="POST" action="/login" class="navbar-form pull-right">
-              <input name="user" class="span3" type="text" placeholder="Email or Username" />
-              <input name="pass" class="span2" type="password" placeholder="Password" />
-              <input type="submit" value="login" class="btn">
-            </form>
-            <!-- ログイン -->
+                    <!-- ログイン -->
+                    <form method="POST" action="/login" class="navbar-form pull-right">
+                      <input name="user" class="span3" type="text" placeholder="Email or Username" />
+                      <input name="pass" class="span2" type="password" placeholder="Password" />
+                      <input type="submit" value="login" class="btn">
+                    </form>
+                    <!-- ログイン -->
+            <% } else { %>
+                    <!-- ログイン状態 -->
+                    <p><%= user %></p>
+                    <form method="POST" action="/logout" class="navbar-form pull-right">
+                        <input type="submit" value="logout" class="btn" >
+                    </form>
+                    <!-- ログイン状態 -->
+            <% } %>
             
-        </div>
+                </div>
 
         <!--/.nav-collapse -->
         </div>
